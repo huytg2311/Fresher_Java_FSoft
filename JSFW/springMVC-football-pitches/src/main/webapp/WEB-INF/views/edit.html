@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/webjars/font-awesome/4.6.3/css/font-awesome.css}">
+    <link rel="stylesheet" th:href="@{/css/home.css}">
+    <link rel="stylesheet" th:href="@{/css/form.css}">
+
+</head>
+<body>
+
+<header>
+    <a th:href="@{/}" class="logo">Fresher PC</a>
+    <ul class="navigation">
+        <li><a th:href="@{/computer}">Computer</a></li>
+        <li><a th:href="@{/customer}">Customer</a></li>
+        <li><a th:href="@{/service}">Service</a></li>
+        <li><a th:href="@{/useComputer/create}">Use Computer</a></li>
+        <li><a th:href="@{/useService/create}">Use Service</a></li>
+    </ul>
+
+    <div class="search">
+        <input type="text" placeholder="Search">
+        <i class="fa fa-search" aria-hidden="true"></i>
+    </div>
+</header>
+
+<div class="formbold-main-wrapper">
+    <!-- Author: FormBold Team -->
+    <!-- Learn More: https://formbold.com -->
+    <div class="formbold-form-wrapper" style="margin-top: -4rem">
+
+        <form th:action="@{/dangKyHoc/update}" th:object="${dangKyHoc}" method="post">
+            <div class="formbold-form-title">
+                <h2 class="">Dang Ky Hoc</h2>
+                <a th:href="@{/dangKyHoc}">Tro ve trang chinh</a>
+            </div>
+
+            <div class="formbold-input-flex">
+                <div>
+                    <label for="maDK" class="formbold-form-label">
+                        Ma Dang Ky Hoc
+                    </label>
+                    <input type="text" th:field="*{maDK}" id="maDK" class="formbold-form-input"/>
+                    <!--                    <p th:if="${#fields.hasErrors('customerId')}" class="text-danger"-->
+                    <!--                       th:errors="*{customerId}"></p>-->
+                </div>
+                <div>
+                    <label for="customerName" class="formbold-form-label">
+                        Ho va ten
+                    </label>
+                    <input type="text"  th:field="*{hoTen}" id="customerName" class="formbold-form-input"/>
+                    <!--                    <p th:if="${#fields.hasErrors('name')}" class="text-danger"-->
+                    <!--                       th:errors="*{name}"></p>-->
+                </div>
+            </div>
+
+            <div class="formbold-input-flex">
+                <div>
+                    <label for="soDienThoai" class="formbold-form-label">So Dien Thoai</label>
+                    <input
+                            type="text"
+                            th:field="*{soDienThoai}"
+                            id="soDienThoai"
+                            class="formbold-form-input"
+                    />
+                    <p th:if="${#fields.hasErrors('soDienThoai')}" class="text-danger"
+                       th:errors="*{soDienThoai}"></p>
+                </div>
+                <div>
+                    <label for="soLuong" class="formbold-form-label">
+                        So luong
+                    </label>
+                    <input
+                            type="text"
+                            th:field="*{soLuong}"
+                            id="soLuong"
+                            class="formbold-form-input"
+                    />
+                    <p th:if="${#fields.hasErrors('soLuong')}" class="text-danger"
+                       th:errors="*{soLuong}"></p>
+                    <p class="text-danger" th:text="${soLuongError}"></p>
+                </div>
+            </div>
+
+            <div class="formbold-input-flex">
+                <div>
+                    <label for="ngayDangKy" class="formbold-form-label">Ngay dang ky</label>
+                    <input
+                            type="date"
+                            th:field="*{ngayDangKy}"
+                            id="ngayDangKy"
+                            class="formbold-form-input"
+                    />
+                    <!--                    <p th:if="${#fields.hasErrors('address')}" class="text-danger"-->
+                    <!--                       th:errors="*{address}"></p>-->
+                </div>
+                <div>
+                    <label for="lichHoc" class="formbold-form-label">
+                        Lich hoc
+                    </label>
+                    <input
+                            type="text"
+                            th:field="*{lichHoc}"
+                            id="lichHoc"
+                            class="formbold-form-input"
+                    />
+                    <!--                    <p th:if="${#fields.hasErrors('phone')}" class="text-danger"-->
+                    <!--                       th:errors="*{phone}"></p>-->
+                </div>
+            </div>
+
+            <div class="formbold-input-flex">
+                <input type="hidden" th:field="*{tongTien}" th:value="1">
+
+                <div>
+                    <label for="maTT" class="formbold-form-label">Ma TT</label>
+                    <input
+                            type="text"
+                            th:field="*{tinhThanh.maTT}"
+                            id="maTT"
+                            class="formbold-form-input"
+                    />
+                    <p th:text="${maTTError}" class="text-danger"></p>
+                </div>
+                <div>
+                    <label class="formbold-form-label">
+                    </label>
+                    <button type="submit" class="formbold-btn">Tao moi</button>
+                    <p class="text-success" th:text="${message}"></p>
+                    <!--                    <p th:if="${#fields.hasErrors('phone')}" class="text-danger"-->
+                    <!--                       th:errors="*{phone}"></p>-->
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>
+</body>
+<script src="/webjars/jquery/3.0.0/jquery.min.js"></script>
+<script src="/webjars/popper.js/1.12.9-1/umd/popper.min.js"></script>
+<script src="/webjars/bootstrap/4.0.0-2/js/bootstrap.min.js"></script>
+
+</html>

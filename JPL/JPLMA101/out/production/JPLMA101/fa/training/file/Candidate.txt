@@ -1,0 +1,5 @@
+FresherCandidate{firstName=Hieu,lastName=Hoi Ham, birthdate=2001-10-03, address=Quang Tri, phone=08129821, email=h4@gmail.com, graduationDate=2010-10-10, graduationRank=Good, education=University}
+FresherCandidate{firstName=Bao,lastName=Bay Bong, birthdate=2001-10-03, address=Quang Nam, phone=08129821, email=h4@gmail.com, graduationDate=2010-10-10, graduationRank=Good, education=University}
+FresherCandidate{firstName=Huy,lastName=Hay Ho, birthdate=2001-10-03, address=Da Nang, phone=08129821, email=h4@gmail.com, graduationDate=2010-10-10, graduationRank=Good, education=University}
+ExperienceCandidate{firstName=Lam,lastName=Long La, birthdate=2001-10-03, address=Dong Nai, phone=08129821, email=h4@gmail.com, yearExperience=2010, professionalSkill=Master}
+ExperienceCandidate{firstName=Ri,lastName=Ron Ren, birthdate=2001-10-03, address=Da Nang, phone=08129821, email=h4@gmail.com, yearExperience=2019, professionalSkill=Chicken}

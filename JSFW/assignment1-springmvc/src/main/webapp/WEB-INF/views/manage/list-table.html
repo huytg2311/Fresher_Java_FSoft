@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/webjars/font-awesome/4.6.3/css/font-awesome.css}">
+    <link rel="stylesheet" th:href="@{/css/home.css}">
+
+</head>
+<body style="color: lightslategrey">
+
+
+
+<div class="m-5" id="container">
+    <table class="table table-bordered" th:each="oball:${customers}" id="hide-table"
+           th:if="${oball.getUseServiceList().size() > 0 || oball.getUseComputerList().size() > 0}">
+        <thead>
+        <tr>
+            <th style="color: #173F5F" scope="col" colspan="4">Customer: <span id="id-customer" style="color: #e9c46a"  th:text="${oball.customerId}"></span></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <th style="color: #173F5F" scope="row">Use Computer</th>
+            <td colspan="4">
+                <table class="table table-striped " th:if="${oball.getUseComputerList().size() > 0}">
+                    <thead>
+                    <tr>
+                        <th scope="col">ID Computer</th>
+                        <th scope="col">Place</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Date Start</th>
+                        <th scope="col">Time Start</th>
+                        <th scope="col">Time Use</th>
+                    </tr>
+                    </thead>
+                    <tbody id="body-s1">
+                    <tr th:each="ob : ${oball.getUseComputerList()}">
+                        <th id="s2" scope="row" th:text="${ob.customerId}"></th>
+                        <td th:text="${ob.useComputer.place}"></td>
+                        <td th:text="${ob.useComputer.status}"></td>
+                        <td th:text="${ob.useDate}"></td>
+                        <td th:text="${ob.useTime}"></td>
+                        <td th:text="${ob.hour}"></td>
+                    </tr>
+
+                    </tbody>
+                </table>
+            </td>
+
+        </tr>
+        <tr>
+            <th style="color: #173F5F" scope="row">Use Service</th>
+            <td colspan="4">
+                <table class="table table-striped " id="table-service" th:if="${oball.getUseServiceList().size() >0}">
+                    <thead>
+                    <tr>
+                        <th scope="col">ID Service</th>
+                        <th scope="col">Date Use</th>
+                        <th scope="col">Time Use</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Price</th>
+                    </tr>
+                    </thead>
+                    <tbody id="body-s2" >
+                    <tr th:each="se : ${oball.getUseServiceList()}">
+                        <th id="s3" scope="row" th:text="${se.service.serviceId}"></th>
+                        <td th:text="${se.useDate}"></td>
+                        <td th:text="${se.useTime}"></td>
+                        <td th:text="${se.quantity}"></td>
+                        <td th:text="${se.service.price}"></td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="4" >Total:</td>
+                        <td id="val" th:text="${#aggregates.sum(oball.getUseServiceList().![service.price*quantity])} + ' VND'" ></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </td>
+
+        </tr>
+
+
+        </tbody>
+    </table>
+</div>
+
+</body>
+<script>
+    toal();
+    function toal() {
+        var table = document.getElementById("table-service"),
+            sumVal = 0;
+        for (var i = 1; i < table.rows.length; i++) {
+            console.log(table.rows[i].cells[4].innerHTML)
+            sumVal = sumVal + parseInt(table.rows[i].cells[4].innerHTML);
+            console.log("vl"+sumVal);
+        }
+
+        $("#val").innerText(sumVal);
+        console.log($("#val"));
+        console.log(sumVal)
+    }
+</script>
+<script src="/webjars/jquery/3.0.0/jquery.min.js"></script>
+<script src="/webjars/jquery/3.0.0/jquery.min.map"></script>
+<script src="/webjars/popper.js/1.12.9-1/umd/popper.min.js"></script>
+<script src="/webjars/popper.js/1.12.9-1/umd/popper.min.js.map"></script>
+<script src="/webjars/bootstrap/4.0.0-2/js/bootstrap.min.js"></script>
+<script src="/webjars/bootstrap/4.0.0-2/js/bootstrap.min.js.map"></script>
+
+</html>

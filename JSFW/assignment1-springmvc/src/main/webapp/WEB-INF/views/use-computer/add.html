@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/webjars/font-awesome/4.6.3/css/font-awesome.css}">
+    <link rel="stylesheet" th:href="@{/css/home.css}">
+    <link rel="stylesheet" th:href="@{/css/form.css}">
+
+</head>
+<body>
+
+<header>
+    <a th:href="@{/}" class="logo">Fresher PC</a>
+    <ul class="navigation">
+        <li><a th:href="@{/computer}">Computer</a></li>
+        <li><a th:href="@{/customer}">Customer</a></li>
+        <li><a th:href="@{/service}">Service</a></li>
+        <li><a th:href="@{/useComputer/create}">Use Computer</a></li>
+        <li><a th:href="@{/useService/create}">Use Service</a></li>
+    </ul>
+
+    <div class="search">
+        <input type="text" placeholder="Search">
+        <i class="fa fa-search" aria-hidden="true"></i>
+    </div>
+</header>
+
+<div class="formbold-main-wrapper">
+    <!-- Author: FormBold Team -->
+    <!-- Learn More: https://formbold.com -->
+    <div class="formbold-form-wrapper" style="margin-top: -2rem">
+
+        <form th:action="@{/useComputer/create}" th:object="${useComputer}" method="post">
+            <div class="formbold-form-title">
+                <h2 class="">Use Computer Create</h2>
+            </div>
+
+            <div class="formbold-input-flex">
+                <div>
+                    <label class="formbold-form-label">ID Computer</label>
+
+                    <select class="formbold-form-input" th:field="*{computerId}" id="computer">
+                        <option th:each="com : ${computerList}"
+                                th:value="${com.computerId}"
+                                th:text="${com.computerId}">
+                        </option>
+
+                    </select>
+                </div>
+                <div>
+                    <label class="formbold-form-label">
+                        ID Customer
+                    </label>
+                    <select th:field="*{customerId}"  class="formbold-form-input">
+                        <option th:each="cus : ${customerList}"
+                                th:value="${cus.customerId}"
+                                th:text="${cus.customerId}">
+                        </option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="formbold-input-flex">
+                <div>
+                    <label for="startDate" class="formbold-form-label">Start Date</label>
+                    <input type="date" th:field="*{useDate}" id="startDate" class="formbold-form-input">
+                    <p class="text-danger" th:if="${#fields.hasErrors('useDate')}" th:errors="*{useDate}"></p>
+                </div>
+
+                <div>
+                    <label for="startTime" class="formbold-form-label">
+                        Start Time
+                    </label>
+                    <input type="time" th:field="*{useTime}" id="startTime" class="formbold-form-input">
+                </div>
+            </div>
+
+            <div class="formbold-input-flex">
+                <div>
+                    <label for="hour" class="formbold-form-label">
+                        Hour
+                    </label>
+                    <input
+                            type="text"
+                            th:field="*{hour}"
+                            id="hour"
+                            class="formbold-form-input"
+                    />
+                    <p class="text-danger" th:if="${#fields.hasErrors('hour')}" th:errors="*{hour}"></p>
+
+                </div>
+                <div>
+                    <label class="formbold-form-label"></label>
+                    <button type="submit" class="formbold-btn">Create Now</button>
+                </div>
+            </div>
+            <div class="formbold-input-flex">
+                <p class="text-success" th:text="${message}"></p>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+</body>
+<script src="/webjars/jquery/3.0.0/jquery.min.js"></script>
+<script src="/webjars/popper.js/1.12.9-1/umd/popper.min.js"></script>
+<script src="/webjars/bootstrap/4.0.0-2/js/bootstrap.min.js"></script>
+
+</html>

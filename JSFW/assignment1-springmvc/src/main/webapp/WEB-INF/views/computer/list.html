@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/webjars/font-awesome/4.6.3/css/font-awesome.css}">
+    <link rel="stylesheet" th:href="@{/css/home.css}">
+    <link rel="stylesheet" th:href="@{/css/main.css}">
+
+
+</head>
+<body>
+<header>
+    <a th:href="@{/}" class="logo">Fresher PC</a>
+    <ul class="navigation">
+        <li><a th:href="@{/computer}">Computer</a></li>
+        <li><a th:href="@{/customer}">Customer</a></li>
+        <li><a th:href="@{/service}">Service</a></li>
+        <li><a th:href="@{/useComputer/create}">Use Computer</a></li>
+        <li><a th:href="@{/useService/create}">Use Service</a></li>
+    </ul>
+
+</header>
+
+<div class="content-main">
+    <div class="title-computer" >
+        <div style="display: flex">
+            <h2>Computer <a th:href="@{/computer/create}"><i style="color: #3CAEA3" class="fa fa-plus-circle" aria-hidden="true"></i></a></h2>
+            <div class="search-computer" style="width: 265px">
+                <input type="text" placeholder="Search" id="searchValue" name="searchValue" oninput="search()">
+                <i class="fa fa-search" aria-hidden="true"></i>
+            </div>
+            <!--        <input style="float: right; width: 200%; border: 1px solid #3CAEA3" type="text" id="searchValue" name="searchValue" class="form-control"-->
+            <!--               placeholder="Search by name" oninput="search()">-->
+        </div>
+    </div>
+
+    <div class="table-content">
+        <table id="tableComputer">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Place</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="com : ${computer}">
+                <td><a th:text="${com.computerId}"></a></td>
+                <td th:text="${com.place}"></td>
+                <td>
+                    <p th:if="${com.status} == 'FREE'" class="status status-paid" th:text="${com.status}"></p>
+                    <p th:if="${com.status} == 'BUSY'" class="status status-unpaid" th:text="${com.status}"></p>
+                    <p th:if="${com.status} == 'MAINTENANCE'" class="status status-pending" th:text="${com.status}"></p>
+                </td>
+                <td>
+                    <a th:href="@{/computer/update/{id}(id=${com.computerId})}">
+                        <i class="fa fa-pencil-square-o text-primary" title="Edit"></i></a>
+                    <a th:data-id="${com.computerId}" onclick="showConfirmDelete(this.getAttribute('data-id'));"
+                       class="delete delBtn" title="Delete">
+                        <i class="fa fa-trash text-danger" title="Delete"></i></a>
+                    <script>
+                        function showConfirmDelete(id) {
+                            $('#id-delete').text(id);
+                            $('#delRef').attr('href', '/computer/delete/' + id);
+                            $('#myModal').modal('show');
+                        }
+                    </script>
+                    <!-- The Modal -->
+                    <div class="modal" id="myModal">
+                        <div class="modal-dialog">
+                            <div class="modal-content" style="border-radius: 0">
+
+                                <!-- Modal Header -->
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Confirm Delete</h4>
+                                    <button type="button" class="close" data-dismiss="modal" >&times;</button>
+                                </div>
+
+                                <!-- Modal body -->
+                                <div class="modal-body">
+                                    Do you want to delete computer have ID <span id="id-delete"
+                                                                                 style="font-weight: bold; color: #e9c46a"></span>
+                                </div>
+
+                                <!-- Modal footer -->
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal" style="border-radius: 0">No</button>
+                                    <a style="border-radius: 0;color: white;background: #3CAEA3" href="" id="delRef" class="btn yes-delete">Yes</a>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+<div class="clearfix" >
+    <ul class="pagination">
+        <li class="page-item"
+            th:classappend="${!computer.hasPrevious()} ? disabled : ''">
+            <a th:href="@{'/computer'(page=${computer.number - 1})}"
+               class="page-link">Previous</a>
+        </li>
+        <li class="page-item">
+            <span th:text="${computer.number + 1}" class="page-link"></span>
+        </li>
+        <li class="page-item"
+            th:classappend="${!computer.hasNext()} ? disabled : ''">
+            <a th:href="@{'/computer'(page=${computer.number + 1})}"
+               class="page-link">Next</a></li>
+    </ul>
+</div>
+
+</body>
+<script>
+    function search() {
+        let id = $("#searchValue").val();
+
+        $.ajax(
+            {
+                type: "GET",
+                url: "/computer/search?searchValue=" + id,
+                dataType: "HTML",
+                success: function (data) {
+                    $("#tableComputer").html(data);
+                }
+            }
+        )
+    }
+</script>
+<script src="/webjars/jquery/3.0.0/jquery.min.js"></script>
+<script src="/webjars/jquery/3.0.0/jquery.min.map"></script>
+<script src="/webjars/popper.js/1.12.9-1/umd/popper.min.js"></script>
+<script src="/webjars/popper.js/1.12.9-1/umd/popper.min.js.map"></script>
+<script src="/webjars/bootstrap/4.0.0-2/js/bootstrap.min.js"></script>
+<script src="/webjars/bootstrap/4.0.0-2/js/bootstrap.min.js.map"></script>
+
+</html>

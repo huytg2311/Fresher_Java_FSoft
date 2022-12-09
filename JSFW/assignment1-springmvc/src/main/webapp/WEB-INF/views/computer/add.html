@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/webjars/font-awesome/4.6.3/css/font-awesome.css}">
+    <link rel="stylesheet" th:href="@{/css/home.css}">
+    <link rel="stylesheet" th:href="@{/css/form.css}">
+
+</head>
+<body>
+
+<header>
+    <a th:href="@{/}" class="logo">Fresher PC</a>
+    <ul class="navigation">
+        <li><a th:href="@{/computer}">Computer</a></li>
+        <li><a th:href="@{/customer}">Customer</a></li>
+        <li><a th:href="@{/service}">Service</a></li>
+        <li><a th:href="@{/useComputer/create}">Use Computer</a></li>
+        <li><a th:href="@{/useService/create}">Use Service</a></li>
+    </ul>
+
+    <div class="search">
+        <input type="text" placeholder="Search">
+        <i class="fa fa-search" aria-hidden="true"></i>
+    </div>
+</header>
+
+<div class="formbold-main-wrapper">
+    <!-- Author: FormBold Team -->
+    <!-- Learn More: https://formbold.com -->
+    <div class="formbold-form-wrapper">
+
+        <form th:action="@{/computer/create}" th:object="${computer}" method="post">
+            <div class="formbold-form-title">
+                <h2 class="">Computer Create</h2>
+
+            </div>
+
+            <div class="formbold-input-flex">
+                <div>
+                    <label for="computerId" class="formbold-form-label">
+                        ID Computer
+                    </label>
+                    <input type="text" th:field="*{computerId}" id="computerId" class="formbold-form-input"/>
+                    <p th:if="${#fields.hasErrors('computerId')}" class="text-danger"
+                       th:errors="*{computerId}"></p>
+                </div>
+                <div>
+                    <label class="formbold-form-label">Status</label>
+
+                    <select class="formbold-form-input" th:field="*{status}" id="status-computer">
+                        <option th:value="'FREE'" th:text="FREE"></option>
+                        <option th:value="'BUSY'" th:text="BUSY"></option>
+                        <option th:value="'MAINTENANCE'" th:text="MAINTENANCE"></option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="formbold-input-flex">
+                <div>
+                    <label for="place" class="formbold-form-label">Place</label>
+                    <input type="text" th:field="*{place}" id="place" class="formbold-form-input"/>
+                    <p th:if="${#fields.hasErrors('place')}" class="text-danger"
+                       th:errors="*{place}"></p>
+                </div>
+
+                <div>
+                    <label class="formbold-form-label"></label>
+                    <button type="submit" class="formbold-btn">Create Now</button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+</body>
+<script src="/webjars/jquery/3.0.0/jquery.min.js"></script>
+<script src="/webjars/popper.js/1.12.9-1/umd/popper.min.js"></script>
+<script src="/webjars/bootstrap/4.0.0-2/js/bootstrap.min.js"></script>
+
+</html>

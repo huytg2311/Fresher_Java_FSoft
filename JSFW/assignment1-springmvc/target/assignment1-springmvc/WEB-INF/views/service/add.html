@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/webjars/font-awesome/4.6.3/css/font-awesome.css}">
+    <link rel="stylesheet" th:href="@{/css/home.css}">
+    <link rel="stylesheet" th:href="@{/css/form.css}">
+
+</head>
+<body>
+
+<header>
+    <a th:href="@{/}" class="logo">Fresher PC</a>
+    <ul class="navigation">
+        <li><a th:href="@{/computer}">Computer</a></li>
+        <li><a th:href="@{/customer}">Customer</a></li>
+        <li><a th:href="@{/service}">Service</a></li>
+        <li><a th:href="@{/useComputer/create}">Use Computer</a></li>
+        <li><a th:href="@{/useService/create}">Use Service</a></li>
+    </ul>
+
+    <div class="search">
+        <input type="text" placeholder="Search">
+        <i class="fa fa-search" aria-hidden="true"></i>
+    </div>
+</header>
+
+<div class="formbold-main-wrapper">
+    <!-- Author: FormBold Team -->
+    <!-- Learn More: https://formbold.com -->
+    <div class="formbold-form-wrapper">
+
+        <form th:action="@{/service/create}" th:object="${service}" method="post">
+            <div class="formbold-form-title">
+                <h2 class="">Service Create</h2>
+            </div>
+
+            <div class="formbold-input-flex">
+                <div>
+                    <label for="serviceId" class="formbold-form-label">
+                        ID Service
+                    </label>
+                    <input type="text" th:field="*{serviceId}" id="serviceId" class="formbold-form-input"/>
+                    <p th:if="${#fields.hasErrors('serviceId')}" class="text-danger"
+                       th:errors="*{serviceId}"></p>
+                </div>
+                <div>
+                    <label for="name" class="formbold-form-label">
+                        Name Service
+                    </label>
+                    <input type="text" th:field="*{name}" id="name" class="formbold-form-input"/>
+                    <p th:if="${#fields.hasErrors('name')}" class="text-danger"
+                       th:errors="*{name}"></p>
+                </div>
+            </div>
+
+            <div class="formbold-input-flex">
+                <div>
+                    <label for="place" class="formbold-form-label">Unit</label>
+                    <input type="text" th:field="*{unit}" id="place" class="formbold-form-input"/>
+                    <p th:if="${#fields.hasErrors('unit')}" class="text-danger"
+                       th:errors="*{unit}"></p>
+                </div>
+
+                <div>
+                    <label for="price">Price</label>
+                    <input type="text" th:field="*{price}" id="price" class="formbold-form-input"/>
+                    <p th:if="${#fields.hasErrors('price')}" class="text-danger"
+                       th:errors="*{price}"></p>
+                    </div>
+            </div>
+
+            <label class="formbold-form-label"></label>
+            <button type="submit" class="formbold-btn">Create Now</button>
+
+        </form>
+    </div>
+</div>
+
+</body>
+<script src="/webjars/jquery/3.0.0/jquery.min.js"></script>
+<script src="/webjars/popper.js/1.12.9-1/umd/popper.min.js"></script>
+<script src="/webjars/bootstrap/4.0.0-2/js/bootstrap.min.js"></script>
+
+</html>

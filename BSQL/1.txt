@@ -1,0 +1,11 @@
+1. Select * from SANPHAM;
+2. delete from KHACHHANG where DiaChi= 'Lang Son';
+3. update SANPHAM set XuatXu = 'Viet Nam' where XuatXu = 'VN';
+4. select * from SANPHAM join DMSANPHAM where (SoLuong > 50 and TenDanhMuc = 'Thoi Trang Nu')
+and (SoLuong >100 and TenDanhMuc = 'Thoi Trang nam') ;
+5. select * from KhachHang where TenKH like 'A%' and LENGTH(TenKH) = 5;
+6. select * from SANPHAM order by TenSanPham Desc, SoLuong asc;
+7. select count(MaSP) from DonHang as d join ChiTietDonHang as c on d.MaDH = c.MaDH 
+Where SoLuong > 5 group by MaKH;
+8. select * from KhachHang group by TenKH;
+9. 

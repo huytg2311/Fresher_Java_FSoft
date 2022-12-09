@@ -1,0 +1,60 @@
+#sidebarMenu {
+    width: 20%;
+    height: 100%;
+    position: absolute;
+}
+
+.inputSearch {
+    width: 70%;
+}
+
+html {
+    height: 100%;
+}
+
+.card {
+    margin-left: 21rem;
+    margin-top: 5rem;
+    width: 77%;
+    height: 85%;
+}
+
+.title {
+    margin-top: 1rem;
+    margin-left: 21rem;
+    position: absolute;
+}
+
+#wait {
+
+    margin-top: 1rem;
+    margin-left: 21rem;
+    position: absolute;
+
+}
+
+
+.submit {
+    background: white;
+    border-radius: 7%;
+    font-weight: lighter;
+}
+
+.reset {
+    background: white;
+    border-radius: 7%;
+    font-weight: lighter;
+
+}
+
+.button-submit {
+    margin-top: 2rem;
+}
+
+table {
+    margin-left: 1.5rem;
+    margin-top: 1.5rem;
+
+}
+
+

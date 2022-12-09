@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/webjars/font-awesome/4.6.3/css/font-awesome.css}">
+    <link rel="stylesheet" th:href="@{/css/home.css}">
+    <link rel="stylesheet" th:href="@{/css/main.css}">
+
+
+</head>
+<body>
+
+
+<!--    <div class="table-content">-->
+        <table id="tableDangKyHoc">
+            <thead>
+            <tr>
+                <th>MaDK</th>
+                <th>HoTen</th>
+                <th>MaTT</th>
+                <th>SoDienThoai</th>
+                <th>SoLuong</th>
+                <th>NgayDangKy</th>
+                <th>LichHoc</th>
+                <th>TongTien</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="dk : ${dangKyHocList}">
+                <td th:text="${dk.maDK}"></td>
+                <td th:text="${dk.hoTen}"></td>
+                <td th:text="${dk.tinhThanh.maTT}"></td>
+                <td th:text="${dk.soDienThoai}"></td>
+                <td th:text="${dk.soLuong}"></td>
+                <td th:text="${dk.ngayDangKy}"></td>
+                <td th:text="${dk.lichHoc}"></td>
+                <td th:text="${dk.tongTien}"></td>
+                <td>
+                    <a th:href="@{/dangKyHoc/update/{id}(id=${dk.maDK})}">
+                        <i class="fa fa-pencil-square-o text-primary" title="Edit"></i></a>
+                    <a class="delete delBtn" title="Delete">
+                        <i class="fa fa-trash text-danger" title="Delete"></i></a>
+                </td>
+            </tr>
+
+            </tbody>
+        </table>
+    </div>
+
+<!--</div>-->
+
+
+</body>
+<script>
+    function search() {
+        let id = $("#searchValue").val();
+
+        $.ajax(
+            {
+                type: "GET",
+                url: "/dangKyHoc/search?searchValue=" + id,
+                dataType: "HTML",
+                success: function (data) {
+                    $("#tableDangKyHoc").html(data);
+                }
+            }
+        )
+    }
+</script>
+<script src="/webjars/jquery/3.0.0/jquery.min.js"></script>
+<script src="/webjars/jquery/3.0.0/jquery.min.map"></script>
+<script src="/webjars/popper.js/1.12.9-1/umd/popper.min.js"></script>
+<script src="/webjars/popper.js/1.12.9-1/umd/popper.min.js.map"></script>
+<script src="/webjars/bootstrap/4.0.0-2/js/bootstrap.min.js"></script>
+<script src="/webjars/bootstrap/4.0.0-2/js/bootstrap.min.js.map"></script>
+
+</html>

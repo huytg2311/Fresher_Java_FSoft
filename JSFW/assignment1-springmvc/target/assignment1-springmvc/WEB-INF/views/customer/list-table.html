@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/webjars/font-awesome/4.6.3/css/font-awesome.css}">
+    <link rel="stylesheet" th:href="@{/css/home.css}">
+    <link rel="stylesheet" th:href="@{/css/main.css}">
+
+
+</head>
+<body>
+
+<table id="tableCustomer">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Address</th>
+        <th>Phone</th>
+        <th>Email</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="cus : ${customer}">
+        <td th:text="${cus.customerId}"></td>
+        <td th:text="${cus.name}"></td>
+        <td th:text="${cus.address}"></td>
+        <td th:text="${cus.phone}"></td>
+        <td th:text="${cus.email}"></td>
+        <td>
+            <a th:href="@{/customer/update/{id}(id=${cus.customerId})}">
+                <i class="fa fa-pencil-square-o text-primary" title="Edit"></i></a>
+            <a th:data-id="${cus.customerId}" onclick="showConfirmDelete(this.getAttribute('data-id'));"
+               class="delete delBtn" title="Delete">
+                <i class="fa fa-trash text-danger" title="Delete"></i></a>
+            <script>
+                function showConfirmDelete(id) {
+                    $('#id-delete').text(id);
+                    $('#delRef').attr('href', '/customer/delete/' + id);
+                    $('#myModal').modal('show');
+                }
+            </script>
+            <!-- The Modal -->
+            <div class="modal" id="myModal">
+                <div class="modal-dialog">
+                    <div class="modal-content" style="border-radius: 0">
+
+                        <!-- Modal Header -->
+                        <div class="modal-header">
+                            <h4 class="modal-title">Confirm Delete</h4>
+                            <button type="button" class="close" data-dismiss="modal" >&times;</button>
+                        </div>
+
+                        <!-- Modal body -->
+                        <div class="modal-body">
+                            Do you want to delete customer have ID <span id="id-delete"
+                                                                         style="font-weight: bold; color: #e9c46a"></span>
+                        </div>
+
+                        <!-- Modal footer -->
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal" style="border-radius: 0">No</button>
+                            <a style="border-radius: 0;color: white;background: #3CAEA3" href="" id="delRef" class="btn yes-delete">Yes</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </td>
+    </tr>
+
+    </tbody>
+</table>
+
+</body>
+<script>
+    function search() {
+        let id = $("#searchValue").val();
+
+        $.ajax(
+            {
+                type: "GET",
+                url: "/customer/search?searchValue=" + id,
+                dataType: "HTML",
+                success: function (data) {
+                    $("#tableCustomer").html(data);
+                }
+            }
+        )
+    }
+</script>
+<script src="/webjars/jquery/3.0.0/jquery.min.js"></script>
+<script src="/webjars/jquery/3.0.0/jquery.min.map"></script>
+<script src="/webjars/popper.js/1.12.9-1/umd/popper.min.js"></script>
+<script src="/webjars/popper.js/1.12.9-1/umd/popper.min.js.map"></script>
+<script src="/webjars/bootstrap/4.0.0-2/js/bootstrap.min.js"></script>
+<script src="/webjars/bootstrap/4.0.0-2/js/bootstrap.min.js.map"></script>
+
+</html>

@@ -1,0 +1,54 @@
+.title {
+    text-align: center;
+}
+
+.card {
+    background: gainsboro;
+    width: 50rem; height: 40rem; margin: 0 auto;
+}
+
+.input-item {
+    margin-left: 3rem;
+}
+
+.input-group-text {
+    margin-right: 3rem;
+}
+
+.input-group {
+    margin-top: 2rem;
+}
+
+.hide-item {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: space-between;
+    
+}
+
+.edit {
+    color: blue;
+}
+
+.delete {
+    color: red;  
+    margin-right: -1.9rem;
+
+}
+
+.name-item {
+    font-weight: bold;
+}
+
+table {
+    margin-top: 3rem;
+    margin-left: 3rem;
+}
+
+td {
+    width: 88%;
+}
+
+.clear {
+    margin: 3rem 20rem 0 20rem ;
+}
